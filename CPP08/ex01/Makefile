@@ -1,9 +1,10 @@
-NAME = ex00
+NAME = ex01
 
 CC = c++
 CFLAGS = -Wall -Werror -Wextra -std=c++98 -fsanitize=address
 
-SRCS = 	main.cpp
+SRCS = 	main.cpp \
+		Span.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
