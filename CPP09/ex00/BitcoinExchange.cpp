@@ -33,12 +33,15 @@ std::map<std::string, float>	BitcoinExchange::_parse() {
 }
 
 bool	BitcoinExchange::_isValidDate(const std::string &date) {
+	if (date.length() != 10)
+		return false;
+	
 	std::istringstream	iss;
 	char				spacer;
 	int					month, day, year;
 
 	if (!(iss >> year >> spacer >> month >> spacer >> day))
 		return false;
-	if (spacer != '-' || year < 0 || month < 1 || month > 12 || day < 1)
+	if (spacer != '-' || year < 0 || month < 1 || month > 12 || day < 1 || day > 31)
 		return false;
 }
