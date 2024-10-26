@@ -38,10 +38,27 @@ bool	BitcoinExchange::_isValidDate(const std::string &date) {
 	
 	std::istringstream	iss;
 	char				spacer;
-	int					month, day, year;
+	int					year, month, day;
+	bool				leapYear;
+	bool				validDay;
 
-	if (!(iss >> year >> spacer >> month >> spacer >> day))
+	if (!(iss >> year >> spacer >> month >> spacer >> day) || !iss.eof())
 		return false;
 	if (spacer != '-' || year < 0 || month < 1 || month > 12 || day < 1 || day > 31)
 		return false;
+
+    leapYear = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+    validDay = false;
+    if (month == 2) {
+        validDay = (day <= 28) || (leapYear && day == 29);
+    } else if (month == 4 || month == 6 || month == 9 || month == 11) {
+        validDay = (day <= 30);
+    } else {
+        validDay = (day <= 31);
+    }
+    return validDay;
+}
+
+bool	BitcoinExchange::_isValidVal(const std::string &val) {
+	
 }
