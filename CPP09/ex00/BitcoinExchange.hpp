@@ -1,10 +1,13 @@
 #ifndef BITCOINEXCHANGE_HPP
 #define BITCOINEXCHANGE_HPP
 
+#include <iostream>
 #include <stdexcept>
 #include <map>
 #include <fstream>
 #include <sstream>
+#include <cstdlib>
+#include <string>
 
 class BitcoinExchange
 {
@@ -17,7 +20,7 @@ private:
 	BitcoinExchange(BitcoinExchange const &copy);
 	BitcoinExchange& operator=(BitcoinExchange const &src);
 
-	bool	_isValidVal(const std::string &val);
+	bool	_isValidVal(const std::string &line);
 	bool	_isValidDate(const std::string &date);
 
 	std::map<std::string, float>	_parse();
@@ -34,7 +37,7 @@ public:
 	BitcoinExchange();
 	~BitcoinExchange();
 
-	void	process(const char file);
+	void	process(const char *file);
 };
 
 #endif
