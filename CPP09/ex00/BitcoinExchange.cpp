@@ -94,7 +94,7 @@ void	BitcoinExchange::process(const char *file) {
 		throw BadDataException();
 	while(std::getline(_input, line)) {
 		if (!_isValidVal(line)) 
-			std::cout << "Error: bad input: " << line << std::endl;
+			std::cout << "Error: bad input => " << line << std::endl;
 		else if (_val < 0)
 			std::cout << "Error: not a positive number." << std::endl;
 		else if (_val > 1000)
