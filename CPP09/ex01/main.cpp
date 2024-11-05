@@ -1,17 +1,17 @@
 #include "RPN.hpp"
 #include <iostream>
 
-int main(int argc, char *argv[])
+int main(int ac, char **av)
 {
-	if (argc != 2 || argv[1][0] == '\0')
+	if (ac != 2 || av[1][0] == '\0')
 	{
-		std::cerr << "Format: ./RPN \"<digit> <digit> <operator> ...\"" << std::endl;
+		std::cerr << "Usage: ./RPN \"<digit> <digit> <operator> ...\"" << std::endl;
 		return 1;
 	}
 
 	try
 	{
-		RPN rpn(argv[1]);
+		RPN rpn(av[1]);
 		std::cout << rpn.compute() << std::endl;
 	}
 	catch (std::exception const &e)

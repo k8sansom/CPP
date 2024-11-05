@@ -18,7 +18,7 @@ private:
 	std::string 	_input;
 	
 	void	_parse(char &c);
-	
+	char	_getOp(char &c);
 };
 
 #endif
