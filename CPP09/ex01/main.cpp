@@ -12,7 +12,7 @@ int main(int ac, char **av)
 	try
 	{
 		RPN rpn(av[1]);
-		std::cout << rpn.compute() << std::endl;
+		std::cout << rpn.computeResult() << std::endl;
 	}
 	catch (std::exception const &e)
 	{

@@ -3,7 +3,7 @@ NAME = RPN
 CC = c++
 CFLAGS = -Wall -Werror -Wextra -std=c++98 -fsanitize=address
 
-SRCS = 	BitcoinExchange.cpp \
+SRCS = 	RPN.cpp \
 		main.cpp
 
 OBJS = $(SRCS:.cpp=.o)

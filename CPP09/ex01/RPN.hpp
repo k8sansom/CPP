@@ -2,7 +2,10 @@
 #define RPN_HPP
 
 #include <stack>
+#include <sstream>
 #include <stdexcept>
+#include <string>
+#include <cctype>
 
 class RPN {
 public:
@@ -11,14 +14,14 @@ public:
     RPN(const RPN& other);
     RPN& operator=(const RPN& other);
 
-	int	compute(void);
+	int	computeResult(void);
 
 private:
     std::stack<int> _stack;
 	std::string 	_input;
 	
-	void	_parse(char &c);
-	char	_getOp(char &c);
+	int		_applyOp(int left, int right, char op);
+	bool	_isOp(char c);
 };
 
 #endif
