@@ -1,29 +1,46 @@
+#ifndef	PMERGEME_HPP
+#define	PMERGEME_HPP
+
 #include <iostream>
 #include <vector>
-#include <deque>
-#include <chrono>
+#include <list>
+#include <ctime>
 #include <algorithm>  
 
-// Function to validate and parse input
-bool parseInput(int argc, char* argv[], std::vector<int>& inputVec) {
-    for (int i = 1; i < argc; ++i) {
-        int number = std::atoi(argv[i]);
-        if (number <= 0) {
-            std::cerr << "Error" << std::endl;
-            return false;
-        }
-        inputVec.push_back(number);
-    }
-    return true;
-}
+struct IntPair
+{
+	int one;
+	int two;
+};
 
-// Implement the Ford-Johnson merge-insert sort for each container separately
-void fordJohnsonSortVector(std::vector<int>& data) {
-    // Placeholder for the Ford-Johnson algorithm implementation on vector
-    // (implement sorting logic here)
-}
+template <typename Con, typename Pairs>
 
-void fordJohnsonSortDeque(std::deque<int>& data) {
-    // Placeholder for the Ford-Johnson algorithm implementation on deque
-    // (implement sorting logic here)
-}
+class PmergeMe {
+	public:
+		PmergeMe();
+		~PmergeMe();
+		PmergeMe(PmergeMe const &copy);
+		PmergeMe& operator=(PmergeMe const &src);
+
+		void	computeInpute(Con& input);
+		Con		getInput();
+		Con		getSorted();
+		int		getSize();
+		void	startTime();
+		void	stopTime();
+		double	getTime();
+	
+	private:
+		clock_t	_start;
+		clock_t	_end;
+		Con		_input;
+		Con		_sorted;
+
+		Pairs		_createPairs();
+		static bool	_sortPairs(IntPair const pairOne, IntPair const pairTwo);
+		static void	_sort(std::vector<IntPair>& pairs);
+		static void	_sort(std::list<IntPair>& pairs);
+		void		_searchInsert(Container &chain, int val, int end);
+};
+
+#endif
