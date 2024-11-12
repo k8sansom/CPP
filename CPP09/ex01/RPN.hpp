@@ -20,6 +20,7 @@ private:
     std::stack<int> _stack;
 	std::string 	_input;
 	
+	void	_validateInput();
 	int		_applyOp(int left, int right, char op);
 	bool	_isOp(char c);
 };
