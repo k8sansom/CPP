@@ -138,5 +138,26 @@ void PmergeMe<C, P>::_searchInsert(C &chain, int val, int end) {
     chain.insert(low, val);
 }
 
+template <typename C, typename P>
+void printMerge(PmergeMe<C, P> &merged)
+{
+	C	before = merged.getInput();
+
+	std::cout << "Before:\t\t";
+	for (typename C::iterator it = before.begin(); it != before.end(); ++it)
+	{
+		std::cout << std::fixed << *it << " ";
+	}
+	std::cout << std::endl;
+
+	Container	after = merged.getSorted();
+	std::cout << "After:\t\t";
+	for (typename C::iterator it = after.begin(); it != after.end(); ++it)
+	{
+		std::cout << std::fixed << *it << " ";
+	}
+	std::cout << std::endl;
+}
+
 template class PmergeMe<std::vector<int>, std::vector<Ints>>;
 template class PmergeMe<std::list<int>, std::list<Ints>>;
