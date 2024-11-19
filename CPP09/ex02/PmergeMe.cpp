@@ -140,21 +140,20 @@ void PmergeMe<C, P>::_searchInsert(C &chain, int val, int end) {
 
 template <typename C, typename P>
 void PmergeMe<C, P>::printMerged() const {
-{
 	//print the input before sorting
 	std::cout << "Before:\t\t";
-	for (typename C::iterator it = _input.begin(); it != _input.end(); ++it) {
+	for (typename C::const_iterator it = _input.begin(); it != _input.end(); ++it) {
 		std::cout << std::fixed << *it << " ";
 	}
 	std::cout << std::endl;
 	
 	//print the sorted output
 	std::cout << "After:\t\t";
-	for (typename C::iterator it = _sorted.begin(); it != _sorted.end(); ++it) {
+	for (typename C::const_iterator it = _sorted.begin(); it != _sorted.end(); ++it) {
 		std::cout << std::fixed << *it << " ";
 	}
 	std::cout << std::endl;
 }
 
-template class PmergeMe<std::vector<int>, std::vector<Ints>>;
-template class PmergeMe<std::list<int>, std::list<Ints>>;
+template class PmergeMe<std::vector<int>, std::vector<Ints> >;
+template class PmergeMe<std::list<int>, std::list<Ints> >;

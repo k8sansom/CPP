@@ -13,13 +13,13 @@ int main(int ac, char **av) {
     	for (int i = 1; i < ac; ++i) {
         	int nbr = std::atoi(av[i]);
         	if (nbr < 0) {
-            		std::cerr << "Error: All numbers must be positive integers." << std::endl;
+            		std::cerr << "Error" << std::endl;
             		return 1;
         	}
         	inputValues.push_back(nbr);
    	}
 	//sort and print for vector
-	PmergeMe<std::vector<int>, std::vector<Ints>> mergedVec;
+	PmergeMe<std::vector<int>, std::vector<Ints> > mergedVec;
 	mergedVec.startTime();
 	mergedVec.computeInput(inputValues);
 	mergedVec.endTime();
