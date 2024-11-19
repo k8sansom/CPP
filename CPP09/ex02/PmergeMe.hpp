@@ -27,6 +27,7 @@ public:
     C		getInput() const;
     C		getSorted() const;
     int		getSize() const;
+	void 	printMerged() const;
 
     // Timing methods
     void	startTime();
