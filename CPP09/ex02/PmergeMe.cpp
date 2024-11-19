@@ -108,12 +108,12 @@ bool PmergeMe<C, P>::_comparePairs(Ints const &pairOne, Ints const &pairTwo) {
 }
 
 template <typename C, typename P>
-void PmergeMe<C, P>::_sort(std::vector<Ints> &pairs, bool (*comp)(const Ints, const Ints)) {
+void PmergeMe<C, P>::_sort(std::vector<Ints> &pairs, bool (*comp)(const Ints&, const Ints&)) {
     std::sort(pairs.begin(), pairs.end(), comp);
 }
 
 template <typename C, typename P>
-void PmergeMe<C, P>::_sort(std::list<Ints> &pairs, bool (*comp)(const Ints, const Ints)) {
+void PmergeMe<C, P>::_sort(std::list<Ints> &pairs, bool (*comp)(const Ints&, const Ints&)) {
     pairs.sort(comp);
 }
 
@@ -138,26 +138,5 @@ void PmergeMe<C, P>::_searchInsert(C &chain, int val, int end) {
     chain.insert(low, val);
 }
 
-template <typename C, typename P>
-void printMerge(PmergeMe<C, P> & merge)
-{
-	Container	before = merge.getInput();
-
-	std::cout << "Before:\t\t";
-	for (typename Container::iterator it = before.begin(); it != before.end(); ++it)
-	{
-		std::cout << std::fixed << *it << " ";
-	}
-	std::cout << std::endl;
-
-	Container	after = merge.getSorted();
-	std::cout << "After:\t\t";
-	for (typename Container::iterator it = after.begin(); it != after.end(); ++it)
-	{
-		std::cout << std::fixed << *it << " ";
-	}
-	std::cout << std::endl;
-}
-
-template class PmergeMe<std::vector<int>, std::vector<std::pair<int, int>>>;
-template class PmergeMe<std::list<int>, std::list<std::pair<int, int>>>;
+template class PmergeMe<std::vector<int>, std::vector<Ints>>;
+template class PmergeMe<std::list<int>, std::list<Ints>>;

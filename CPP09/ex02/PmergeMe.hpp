@@ -43,8 +43,8 @@ private:
     // Private methods
     P 			_createPairs() const;
     static bool	_comparePairs(Ints const &pairOne, Ints const &pairTwo);
-    static void _sort(std::vector<Ints> &pairs, bool (*comp)(const Ints, const Ints));
-    static void _sort(std::list<Ints> &pairs, bool (*comp)(const Ints, const Ints));
+    static void _sort(std::vector<Ints> &pairs, bool (*comp)(const Ints&, const Ints&));
+    static void _sort(std::list<Ints> &pairs, bool (*comp)(const Ints&, const Ints&));
     void		_searchInsert(C &chain, int val, int end);
 };
 

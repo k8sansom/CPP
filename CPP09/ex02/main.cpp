@@ -1,54 +1,76 @@
 #include "PmergeMe.hpp"
-#include <sstream>
+#include <iomanip>
 
-template <typename C>
-void parseInput(C &input, int ac, char **av) {
-    for (int i = 1; i < ac; ++i) {
-        std::istringstream ss(av[i]);
-        int num;
-        ss >> num;
-        input.push_back(num);
-    }
+template <typename Container, typename Pairs>
+void printMerge(PmergeMe<Container, Pairs> & merge)
+{
+	Container	before = merge.getInput();
+
+	std::cout << "Before:\t\t";
+	for (typename Container::iterator it = before.begin(); it != before.end(); ++it)
+	{
+		std::cout << std::fixed << *it << " ";
+	}
+	std::cout << std::endl;
+
+	Container	after = merge.getSorted();
+	std::cout << "After:\t\t";
+	for (typename Container::iterator it = after.begin(); it != after.end(); ++it)
+	{
+		std::cout << std::fixed << *it << " ";
+	}
+	std::cout << std::endl;
 }
 
-int main(int ac, char **av) {
-	std::srand(std::time(0));
-    if (ac < 2) {
-        std::cerr << "Error: Please provide a sequence of integers.\n";
-        return 1;
-    }
-    std::vector<int> inputVector;
-    std::list<int> inputList;
+int main(int argc, char *argv[])
+{
+	if (argc < 2)
+	{
+		std::cerr << "Format: ./PmergeMe <int> <int> ... " << std::endl;
+		return 1;
+	}
 
-    parseInput(inputVector, ac, av);
-    parseInput(inputList, ac, av);
+	{
+		std::vector<int> unsortedVec;
+		for (int i = 1; i < argc; i++)
+		{
+			int nbr = std::atoi(argv[i]);
+			if (nbr < 0)
+			{
+				std::cerr << "Error" << std::endl;
+				return 1;
+			}
+			unsortedVec.push_back(nbr);
+		}
 
-	//process vector
-    PmergeMe<std::vector<int>, std::vector<Ints>> pmergeVector;
-    pmergeVector.computeInput(inputVector);
+		PmergeMe<std::vector<int>, std::vector<Ints> > merge;
+		merge.startTime();
+		merge.computeInput(unsortedVec);
+		merge.endTime();
+		printMerge(merge);
+		std::cout << "Time to process a range of " << merge.getSize() << " elements with std::vector : ";
+		std::cout << std::fixed << std::setprecision(1) << merge.getTime() << " us" << std::endl;
+	}
 
-    std::cout << "Before: ";
-    for (std::vector<int>::const_iterator it = inputVector.begin(); it != inputVector.end(); ++it)
-        std::cout << *it << " ";
-    std::cout << std::endl;
-    std::cout << "After: ";
-    for (std::vector<int>::const_iterator it = pmergeVector.getSorted().begin(); it != pmergeVector.getSorted().end(); ++it)
-        std::cout << *it << " ";
-    std::cout << std::endl;
-    std::cout << "Time to process a range of " << pmergeVector.getSize() << " elements with std::vector: " << pmergeVector.getTime() << " us\n";
+	{
+		std::list<int> unsortedLst;
+		for (int i = 1; i < argc; i++)
+		{
+			int nbr = std::atoi(argv[i]);
+			if (nbr < 0)
+			{
+				std::cerr << "Error" << std::endl;
+				return 1;
+			}
+			unsortedLst.push_back(nbr);
+		}
 
-	//process list
-    PmergeMe<std::list<int>, std::list<Ints>> pmergeList;
-    pmergeList.computeInput(inputList);
-    std::cout << "Before: ";
-    for (std::list<int>::const_iterator it = inputList.begin(); it != inputList.end(); ++it)
-        std::cout << *it << " ";
-    std::cout << std::endl;
-    std::cout << "After: ";
-    for (std::list<int>::const_iterator it = pmergeList.getSorted().begin(); it != pmergeList.getSorted().end(); ++it)
-        std::cout << *it << " ";
-    std::cout << std::endl;
-    std::cout << "Time to process a range of " << pmergeList.getSize() << " elements with std::list: " << pmergeList.getTime() << " us\n";
-
-    return 0;
+		PmergeMe<std::list<int>, std::list<Ints> > merge;
+		merge.startTime();
+		merge.computeInput(unsortedLst);
+		merge.endTime();
+		std::cout << "Time to process a range of " << merge.getSize() << " elements with std::list : ";
+		std::cout << std::fixed << std::setprecision(1) << merge.getTime() << " us" << std::endl;
+	}
+	return 0;
 }
