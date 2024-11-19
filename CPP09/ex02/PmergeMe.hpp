@@ -5,42 +5,47 @@
 #include <vector>
 #include <list>
 #include <ctime>
-#include <algorithm>  
+#include <algorithm> 
+#include <cmath>
 
-struct IntPair
-{
-	int one;
-	int two;
+struct Ints {
+	int	first;
+	int	second;
 };
 
-template <typename Con, typename Pairs>
-
+template <typename C, typename P>
 class PmergeMe {
-	public:
-		PmergeMe();
-		~PmergeMe();
-		PmergeMe(PmergeMe const &copy);
-		PmergeMe& operator=(PmergeMe const &src);
+public:
+    // Constructor, Destructor, and Assignment
+    PmergeMe();
+    ~PmergeMe();
+    PmergeMe(PmergeMe const &copy);
+    PmergeMe& operator=(PmergeMe const &src);
 
-		void	computeInpute(Con& input);
-		Con		getInput();
-		Con		getSorted();
-		int		getSize();
-		void	startTime();
-		void	stopTime();
-		double	getTime();
-	
-	private:
-		clock_t	_start;
-		clock_t	_end;
-		Con		_input;
-		Con		_sorted;
+    // Public methods
+    void	computeInput(C &input);
+    C		getInput() const;
+    C		getSorted() const;
+    int		getSize() const;
 
-		Pairs		_createPairs();
-		static bool	_sortPairs(IntPair const pairOne, IntPair const pairTwo);
-		static void	_sort(std::vector<IntPair>& pairs);
-		static void	_sort(std::list<IntPair>& pairs);
-		void		_searchInsert(Container &chain, int val, int end);
+    // Timing methods
+    void	startTime();
+    void	endTime();
+    double	getTime() const;
+
+private:
+    // Member variables
+    clock_t _start;
+    clock_t _end;
+    C		_input;
+    C		_sorted;
+
+    // Private methods
+    P 			_createPairs() const;
+    static bool	_comparePairs(Ints const &pairOne, Ints const &pairTwo);
+    static void _sort(std::vector<Ints> &pairs, bool (*comp)(const Ints, const Ints));
+    static void _sort(std::list<Ints> &pairs, bool (*comp)(const Ints, const Ints));
+    void		_searchInsert(C &chain, int val, int end);
 };
 
 #endif
