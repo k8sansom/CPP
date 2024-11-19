@@ -92,10 +92,7 @@ P PmergeMe<C, P>::_createPairs() const {
     std::advance(nextIt, 1);
 
     while (it != _input.end() && nextIt != _input.end()) {
-		Ints pair;
-		pair.first = std::max(*it, *nextIt);
-		pair.second = std::min(*it, *nextIt);
-        pairs.push_back(pair);
+        pairs.push_back(std::make_pair(std::max(*it, *nextIt), std::min(*it, *nextIt)));
         std::advance(it, 2);
         std::advance(nextIt, 2);
     }
@@ -103,20 +100,19 @@ P PmergeMe<C, P>::_createPairs() const {
 }
 
 template <typename C, typename P>
-bool PmergeMe<C, P>::_comparePairs(Ints const &pairOne, Ints const &pairTwo) {
+bool PmergeMe<C, P>::_comparePairs(const std::pair<int, int> &pairOne, const std::pair<int, int> &pairTwo) {
     return pairOne.first <= pairTwo.first;
 }
 
 template <typename C, typename P>
-void PmergeMe<C, P>::_sort(std::vector<Ints> &pairs, bool (*comp)(const Ints&, const Ints&)) {
+void PmergeMe<C, P>::_sort(std::vector<std::pair<int, int> > &pairs, bool (*comp)(const std::pair<int, int>&, const std::pair<int, int>&)) {
     std::sort(pairs.begin(), pairs.end(), comp);
 }
 
 template <typename C, typename P>
-void PmergeMe<C, P>::_sort(std::list<Ints> &pairs, bool (*comp)(const Ints&, const Ints&)) {
+void PmergeMe<C, P>::_sort(std::list<std::pair<int, int> > &pairs, bool (*comp)(const std::pair<int, int>&, const std::pair<int, int>&)) {
     pairs.sort(comp);
 }
-
 
 template <typename C, typename P>
 void PmergeMe<C, P>::_searchInsert(C &chain, int val, int end) {
@@ -155,5 +151,5 @@ void PmergeMe<C, P>::printMerged() const {
 	std::cout << std::endl;
 }
 
-template class PmergeMe<std::vector<int>, std::vector<Ints> >;
-template class PmergeMe<std::list<int>, std::list<Ints> >;
+template class PmergeMe<std::vector<int>, std::vector<std::pair<int, int> > >;
+template class PmergeMe<std::list<int>, std::list<std::pair<int, int> > >;

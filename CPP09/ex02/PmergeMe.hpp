@@ -7,11 +7,7 @@
 #include <ctime>
 #include <algorithm> 
 #include <cmath>
-
-struct Ints {
-	int	first;
-	int	second;
-};
+#include <utility>
 
 template <typename C, typename P>
 class PmergeMe {
@@ -42,11 +38,11 @@ private:
     C		_sorted;
 
     // Private methods
-    P 		_createPairs() const;
-    static bool	_comparePairs(Ints const &pairOne, Ints const &pairTwo);
-    static void _sort(std::vector<Ints> &pairs, bool (*comp)(const Ints&, const Ints&));
-    static void _sort(std::list<Ints> &pairs, bool (*comp)(const Ints&, const Ints&));
-    void	_searchInsert(C &chain, int val, int end);
+    P 		    _createPairs() const;
+    static bool	_comparePairs(const std::pair<int, int> &pairOne, const std::pair<int, int> &pairTwo);
+    static void _sort(std::vector<std::pair<int, int> > &pairs, bool (*comp)(const std::pair<int, int>&, const std::pair<int, int>&));
+    static void _sort(std::list<std::pair<int, int> > &pairs, bool (*comp)(const std::pair<int, int>&, const std::pair<int, int>&));
+    void	    _searchInsert(C &chain, int val, int end);
 };
 
 #endif

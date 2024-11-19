@@ -19,7 +19,7 @@ int main(int ac, char **av) {
         	inputValues.push_back(nbr);
    	}
 	//sort and print for vector
-	PmergeMe<std::vector<int>, std::vector<Ints> > mergedVec;
+	PmergeMe<std::vector<int>, std::vector<std::pair<int, int> > > mergedVec;
 	mergedVec.startTime();
 	mergedVec.computeInput(inputValues);
 	mergedVec.endTime();
@@ -29,7 +29,7 @@ int main(int ac, char **av) {
 
 	//sort and print for list
 	std::list<int> inputList(inputValues.begin(), inputValues.end());
-	PmergeMe<std::list<int>, std::list<Ints> > mergedList;
+	PmergeMe<std::list<int>, std::list<std::pair<int, int> > > mergedList;
 	mergedList.startTime();
 	mergedList.computeInput(inputList);
 	mergedList.endTime();
