@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <list>
-#include <ctime>
+#include <sys/time.h>
 #include <algorithm> 
 #include <cmath>
 #include <utility>
@@ -26,9 +26,9 @@ public:
 	void 	printMerged() const;
 
     // Timing methods
-    void	startTime();
-    void	endTime();
-    double	getTime() const;
+    void		startTime();
+    void		endTime();
+    long double	getTime() const;
 
 private:
     // Member variables

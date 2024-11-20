@@ -71,17 +71,21 @@ int		PmergeMe<C, P>::getSize() const{
 
 template <typename C, typename P>
 void PmergeMe<C, P>::startTime() {
-    _start = clock();
+    struct timeval time;
+    gettimeofday(&time, NULL);
+    _start = static_cast<long double>(time.tv_sec) * 1e6 + static_cast<long double>(time.tv_usec);
 }
 
 template <typename C, typename P>
 void PmergeMe<C, P>::endTime() {
-    _end = clock();
+    struct timeval time;
+    gettimeofday(&time, NULL);
+    _end = static_cast<long double>(time.tv_sec) * 1e6 + static_cast<long double>(time.tv_usec);
 }
 
 template <typename C, typename P>
-double PmergeMe<C, P>::getTime() const {
-    return static_cast<double>(_end - _start) / CLOCKS_PER_SEC * 1e6; // Time in microseconds
+long double PmergeMe<C, P>::getTime() const {
+    return _end - _start;
 }
 
 template <typename C, typename P>
